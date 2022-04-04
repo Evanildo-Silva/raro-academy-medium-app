@@ -6,13 +6,14 @@ import { RitchTextEditor } from "../RitchTextEditor";
 
 type ArticleFormProps = {
   article?: ArticleThumbnailProps;
-  // adicionamos uma propriedade de onSubmit, a ser disparada quando o usuário enviar o form.
   onSubmit?: (article: ArticleThumbnailProps) => void;
+  onClick: () => void;
 }
 
 export const ArticleForm: React.FC<ArticleFormProps> = ({
   article,
-  onSubmit
+  onSubmit,
+  onClick
 }) => {
   const [titulo, setTitulo] = useState("");
   const [resumo, setResumo] = useState("");
@@ -98,6 +99,23 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
           />
 
           <Button type="submit">Salvar</Button>
+          <Button 
+            type="submit" 
+            color={`
+              w-full mt-6 tracking-widest
+              border-b-blue-600 bg-blue-500 py-3 text-white font-bold
+              hover:bg-blue-400 active:translate-y-[0.125rem] active:border-b-blue-400
+            `}
+          >Salvar</Button>
+          <Button 
+            type="button" 
+            color={`
+              w-full mt-6 tracking-widest
+              border-b-red-600 bg-red-500 py-3 text-white font-bold
+              hover:bg-red-400 active:translate-y-[0.125rem] active:border-b-red-400
+            `}
+            onClick={onClick}
+            >Deletar</Button>
         </form>
       </div>
     </div>

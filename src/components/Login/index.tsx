@@ -88,7 +88,7 @@ export const Login = () => {
             ) : <></>
           }
           <div>
-            <Button type="submit" >{ loading ? 'loading...' : 'Entrar' }</Button>
+            <Button disabled={ loading } type="submit" >{ loading ? 'loading...' : 'Entrar' }</Button>
           </div>
         </form>
       </div>
