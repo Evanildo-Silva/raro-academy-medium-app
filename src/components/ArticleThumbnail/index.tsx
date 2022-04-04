@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { formataData } from "../../helpers/date";
 import { ArticleThumbnailProps } from "./ArticleThumbnail.types";
 
 export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
+  id,
   imagem,
   titulo,
   resumo,
   dataPublicacao,
   tempoLeitura = '7 min',
-  autor,
-  editavel,
-  id
+  autor
 }) => {
+  // criamos um state de editável, pois agora podemos calcular se ele deve ser editável ou
+  // não.
+  const [editavel, setEditavel] = useState(false);
+
+// adicionamos um effect, que deve ser atualizado a cada nova informação de autor. Este effect
+// atualiza o state de `editavel` sempre que o autor for alterado.
+ useEffect(() => {
+    // este Number(...) é necessário, pois o localStorage armazena strings. Nosso autor.id é
+    // numérico.
+   const usuarioAtual = Number(localStorage.getItem('usuarioId'));
+   setEditavel(autor.id === usuarioAtual);
+ }, [autor]);
+
   return (
     <div className="flex flex-col w-2/3 mt-5">
       <Link to={`/artigo/${id}`}>
