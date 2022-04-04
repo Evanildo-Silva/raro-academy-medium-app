@@ -7,7 +7,7 @@ import { RitchTextEditor } from "../RitchTextEditor";
 type ArticleFormProps = {
   article?: ArticleThumbnailProps;
   onSubmit?: (article: ArticleThumbnailProps) => void;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const ArticleForm: React.FC<ArticleFormProps> = ({
@@ -29,9 +29,6 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
     }
   }, [article]);
 
-  // criamos um novo evento para este componente: sempre que o usuário 
-  // fizer o submit do form, vamos enviar para o componente pai o artigo
-  // que deve ser submetido.
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (onSubmit) {
@@ -54,6 +51,7 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
       setImagem(event.target.result);
     };
   };
+
   return (
     <div className="grid min-h-screen mx-10 ">
       <div>
@@ -62,7 +60,6 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
           <span className="font-normal">please fill in your information to continue</span>
         </h1>
         <form className="mt-6" onSubmit={handleSubmit}>
-          {/* Adicionamos o estado e o evento de alteração em todos os campos. */}
           <Input
             placeholder="Digite aqui o título"
             type="text"
@@ -73,7 +70,7 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
             required
           />
           <Input
-            placeholder="Breve rewsumo do artigo"
+            placeholder="Breve resumo do artigo"
             type="textarea"
             name="resumo"
             label="Resumo"
@@ -83,7 +80,7 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
           />
 
           <Input
-            placeholder="Breve rewsumo do artigo"
+            placeholder="Breve resumo do artigo"
             type="file"
             name="image"
             label="Banner"
@@ -93,12 +90,11 @@ export const ArticleForm: React.FC<ArticleFormProps> = ({
 
           <RitchTextEditor
             label="Conteúdo"
-            name="conteudo"
+            name="conteúdo"
             value={ conteudo }
             onChange={ setConteudo }
           />
 
-          <Button type="submit">Salvar</Button>
           <Button 
             type="submit" 
             color={`

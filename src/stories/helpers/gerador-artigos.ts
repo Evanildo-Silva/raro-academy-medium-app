@@ -12,6 +12,7 @@ export const geraArtigos = (quantidade: number): ArticleThumbnailProps[] => {
       nome: faker.name.firstName(),
       avatar: faker.image.avatar(),
     },
-    id: faker.datatype.number({min: 1, max:30})
+    id: faker.datatype.number({min: 1, max:30}),
+    conteudo: faker.lorem.paragraph()
   }));
 }
