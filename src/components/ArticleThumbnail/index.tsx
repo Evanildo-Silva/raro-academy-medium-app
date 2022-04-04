@@ -12,16 +12,11 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
   tempoLeitura = '7 min',
   autor
 }) => {
-  // criamos um state de editável, pois agora podemos calcular se ele deve ser editável ou
-  // não.
+
   const [editavel, setEditavel] = useState(false);
 
-// adicionamos um effect, que deve ser atualizado a cada nova informação de autor. Este effect
-// atualiza o state de `editavel` sempre que o autor for alterado.
  useEffect(() => {
-    // este Number(...) é necessário, pois o localStorage armazena strings. Nosso autor.id é
-    // numérico.
-   const usuarioAtual = Number(localStorage.getItem('usuarioId'));
+   const usuarioAtual = Number(localStorage.getItem('id'));
    setEditavel(autor.id === usuarioAtual);
  }, [autor]);
 
@@ -51,7 +46,7 @@ export const ArticleThumbnail: React.FC<ArticleThumbnailProps> = ({
           </div>
         </div>
       </Link>
-      <Link to={'/artigo/editar/:id'}>
+      <Link to={`/artigos/editar/${id}`}>
         <footer className="flex flex-row pt-7 gap-3 items-center">
           <div className="text-gray-500 text-xs my-1">
             { tempoLeitura } de leitura
